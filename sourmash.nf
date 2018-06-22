@@ -1,9 +1,12 @@
 #!/usr/bin/env nextflow
 
-params.reads = 'data/*.fq'
+//params.reads = 'data/*.fq'
+params.reads         = "$baseDir/data/"
+params.readsExtension="fq"
+allReads="${params.reads}/*.${params.readsExtension}"
 params.adapt = 'data/adapters.fasta'
 
-files = Channel.fromPath(params.reads)
+files = Channel.fromPath(allReads)
 adapters = file(params.adapt)
 
 process adapter_trimming {
